@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ai4os/DEEPaaS:
+      branch: master
+      repo: https://github.com/ai4os/DEEPaaS
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ai4os/DEEPaaS git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-aqua-wasp.sh
+        container: qc.acc_gloppy-cornflower-bandicoot
+  QC.Doc:
+    repos:
+      github.com/ai4os/DEEPaaS find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-olivine-horse.sh
+        container: qc.doc_zippy-cobalt-wolverine
+      github.com/ai4os/DEEPaaS git:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-denim-leopard.sh
+        container: qc.doc_ugly-wisteria-reindeer
+  QC.Lic:
+    repos:
+      github.com/ai4os/DEEPaaS licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-crimson-akbash.sh
+        container: qc.lic_sickly-scarlet-bulldog
+  QC.Ver:
+    repos:
+      github.com/ai4os/DEEPaaS get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-gamboge-frigatebird.sh
+        container: qc.ver_stealthy-ochre-malamute
+timeout: 5400
